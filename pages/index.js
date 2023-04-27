@@ -49,7 +49,7 @@ export default function Home() {
     }
   }, [loading, result]);
 
-  async function retry(fn, retries = 3, interval = 1000) {
+  async function retry(fn, retries = 3, interval = 2000) {
     try {
       return await fn();
     } catch (error) {
