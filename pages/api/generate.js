@@ -60,5 +60,5 @@ export default async function (req, res) {
 function generatePrompt(animal) {
   const capitalizedAnimal =
     animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-    return `Write a short story about a ${capitalizedAnimal} who becomes a hero in a fantastical world.`;
+    return `Write a unique tale of a ${capitalizedAnimal} embarking on a heroic journey in a magical realm.`;
 }
