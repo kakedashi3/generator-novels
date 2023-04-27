@@ -4,9 +4,10 @@ import styles from "./index.module.css";
 
 export default function Home() {
   const [animalInput, setAnimalInput] = useState("");
-  const [result, setResult] = useState();
+  const [result, setResult] = useState("");
+  const [displayedResult, setDisplayedResult] = useState("");
   const [loading, setLoading] = useState(false);
-  const [loadingMessage, setLoadingMessage] = useState("Loading..."); 
+  const [loadingMessage, setLoadingMessage] = useState("Loading...");
 
   useEffect(() => {
     let timeoutId;
@@ -32,6 +33,21 @@ export default function Home() {
       clearTimeout(timeoutId);
     };
   }, [loading, loadingMessage]);
+
+  useEffect(() => {
+    let index = 0;
+    if (!loading) {
+      const typeWriterEffect = () => {
+        if (index < result.length) {
+          setDisplayedResult((prev) => prev + result[index]);
+          index++;
+          setTimeout(typeWriterEffect, 50);
+        }
+      };
+      setDisplayedResult("");
+      typeWriterEffect();
+    }
+  }, [loading, result]);
 
   async function retry(fn, retries = 3, interval = 1000) {
     try {
@@ -102,7 +118,11 @@ export default function Home() {
           />
           <input type="submit" value="Generate novels" />
         </form>
-        {loading ? <div>{loadingMessage}</div> : <div className={styles.result}>{result}</div>}
+        {loading ? (
+          <div>{loadingMessage}</div>
+        ) : (
+          <div className={styles.result}>{displayedResult}</div>
+        )}
       </main>
     </div>
   );
