@@ -34,13 +34,13 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>kakedashi novels</title>
+        <title>kakedashi novel</title>
         <link rel="icon" href="/frog.png" />
       </Head>
 
       <main className={styles.main}>
         <img src="/frog.png" className={styles.icon} />
-        <h3>Generate Animal Novels</h3>
+        <h3>Generate Animal Novel</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
