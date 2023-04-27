@@ -108,6 +108,7 @@ export default function Home() {
       <main className={styles.main}>
         <img src="/frog.png" className={styles.icon} />
         <h3>Generate Animal Novel</h3>
+        <h4>A short story about being a hero in a fantasy world.</h4>
         <form onSubmit={onSubmit}>
           <input
             type="text"
