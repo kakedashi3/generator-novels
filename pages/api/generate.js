@@ -39,7 +39,7 @@ export default async function (req, res) {
       model: "text-davinci-003",
       prompt: generatePrompt(animal),
       temperature: 0.6,
-      max_tokens: 120,
+      max_tokens: 130,
     });
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
@@ -60,5 +60,5 @@ export default async function (req, res) {
 function generatePrompt(animal) {
   const capitalizedAnimal =
     animal[0].toUpperCase() + animal.slice(1).toLowerCase();
-    return `Write a unique tale of a ${capitalizedAnimal} embarking on a heroic journey in a magical realm.`;
+    return `Write a short story about a ${capitalizedAnimal} who becomes a hero in a fantastical world.`;
 }
