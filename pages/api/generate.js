@@ -6,6 +6,15 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 export default async function (req, res) {
+  if (req.method !== "POST") {
+    res.status(405).json({
+      error: {
+        message: "Method Not Allowed",
+      }
+    });
+    return;
+  }
+
   if (!configuration.apiKey) {
     res.status(500).json({
       error: {
@@ -34,7 +43,6 @@ export default async function (req, res) {
     });
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
-    // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
       res.status(error.response.status).json(error.response.data);
