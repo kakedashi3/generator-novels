@@ -1,11 +1,37 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useEffect } from "react"; 
 import styles from "./index.module.css";
 
 export default function Home() {
   const [animalInput, setAnimalInput] = useState("");
   const [result, setResult] = useState();
   const [loading, setLoading] = useState(false);
+  const [loadingMessage, setLoadingMessage] = useState("Loading..."); 
+
+  useEffect(() => {
+    let timeoutId;
+    if (loading) {
+      const updateLoadingMessage = () => {
+        switch (loadingMessage) {
+          case "Loading...":
+            setLoadingMessage("Loading.");
+            break;
+          case "Loading.":
+            setLoadingMessage("Loading..");
+            break;
+          case "Loading..":
+            setLoadingMessage("Loading...");
+            break;
+        }
+        timeoutId = setTimeout(updateLoadingMessage, 500);
+      };
+      timeoutId = setTimeout(updateLoadingMessage, 500);
+    }
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [loading, loadingMessage]);
 
   async function retry(fn, retries = 3, interval = 1000) {
     try {
@@ -76,7 +102,7 @@ export default function Home() {
           />
           <input type="submit" value="Generate novels" />
         </form>
-        {loading ? <div>Loading...</div> : <div className={styles.result}>{result}</div>}
+        {loading ? <div>{loadingMessage}</div> : <div className={styles.result}>{result}</div>}
       </main>
     </div>
   );
