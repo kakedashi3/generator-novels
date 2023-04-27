@@ -64,5 +64,18 @@
 .main .result {
   font-weight: bold;
   margin-top: 40px;
-  padding: 0 400px;
+}
+
+/* PCデバイス用のスタイル */
+@media screen and (min-width: 768px) {
+  .main .result {
+    padding: 0 400px;
+  }
+}
+
+/* スマートフォンデバイス用のスタイル */
+@media screen and (max-width: 767px) {
+  .main .result {
+    padding: 0 20px;
+  }
 }
